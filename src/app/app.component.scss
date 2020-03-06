@@ -1,0 +1,26 @@
+.toolbar {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    background-color: #2196f3;
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+    .home {
+        width: fit-content;
+        margin: auto 8px;
+        font-size: 16px;
+    }
+    .logo {
+        width: fit-content;
+        margin: auto auto auto 8px;
+        font-size: 20px;
+        font-family: sans-serif;
+    }
+    .settings {
+        width: fit-content;
+        margin: auto 8px;
+        font-size: 16px;
+    }
+}

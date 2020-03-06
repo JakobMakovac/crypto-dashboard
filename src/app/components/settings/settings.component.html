@@ -1,0 +1,17 @@
+<div class="main">
+    <h1>Settings</h1>
+    <div class="settings-container">
+        <div class="settings-row" (click)="changeCurrency('EUR')">
+            <div class="toggle" [class.selected]="(settings$ | async)?.currency === 'EUR'"></div>
+            <span>EUR</span>
+        </div>
+        <div class="settings-row" (click)="changeCurrency('CNY')">
+            <div class="toggle" [class.selected]="(settings$ | async)?.currency === 'CNY'"></div>
+            <span>CNY</span>
+        </div>
+        <div class="settings-row" (click)="changeCurrency('USD')">
+            <div class="toggle" [class.selected]="(settings$ | async)?.currency === 'USD'"></div>
+            <span>USD</span>
+        </div>
+    </div>
+</div>
