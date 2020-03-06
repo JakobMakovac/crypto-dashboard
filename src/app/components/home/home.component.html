@@ -1,1 +1,5 @@
 <p>home works!</p>
+<div (click)="fetchCurrencyList()" class="button">Fetch</div>
+<div *ngFor="let currency of currencyList">
+    {{ currency.name }}
+</div>

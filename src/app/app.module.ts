@@ -9,20 +9,25 @@ import { StoreModule } from '@ngrx/store';
 import { appReducers } from './store/reducers/app.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { SettingsEffects } from './store/effects/settings.effects';
+import { CryptocurrenciesApiService } from './services/cryptocurrencies-api.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    SettingsComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([SettingsEffects])
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        SettingsComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        StoreModule.forRoot(appReducers),
+        EffectsModule.forRoot([SettingsEffects])
+    ],
+    providers: [
+        CryptocurrenciesApiService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
