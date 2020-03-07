@@ -12,6 +12,11 @@ import { Settings } from 'src/app/models/settings.model';
 })
 export class SettingsComponent implements OnInit {
     settings$ = this._store.pipe(select(_selectSettings));
+    currencyIdsByname = {
+        'USD': 2781,
+        'CNY': 2787,
+        'EUR': 2790
+    }
 
     constructor(
         private _store: Store<AppState>
@@ -22,8 +27,10 @@ export class SettingsComponent implements OnInit {
     }
 
     changeCurrency(newCurrency: string) {
+        let currencyId = this.currencyIdsByname[newCurrency];
         let newSettings: Settings = {
-            currency: newCurrency
+            currency: newCurrency,
+            id: currencyId
         };
 
         this._store.dispatch(UpdateSettings({_settings: newSettings}));

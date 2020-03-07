@@ -6,6 +6,7 @@ export interface SettingsState{
 
 export const initialSettingsState: SettingsState = {
     settings: {
-        currency: 'USD'
+        currency: 'USD',
+        id: 2781
     }
 };

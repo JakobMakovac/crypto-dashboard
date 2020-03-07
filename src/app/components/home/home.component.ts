@@ -1,7 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { CryptocurrenciesApiService } from 'src/app/services/cryptocurrencies-api.service';
-import { map } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { tap } from 'rxjs/operators';
 import { Currency } from 'src/app/models/currency.model';
+import { Settings } from 'src/app/models/settings.model';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/store/state/app.state';
+import { _selectSettings } from 'src/app/store/selectors/settings.selector';
+import { Subscription } from 'rxjs';
+import { _selectCurrencies } from 'src/app/store/selectors/currencies.selector';
+import { GetCurrencies } from 'src/app/store/actions/currencies.actions';
+import { QuoteInfo } from 'src/app/models/quote-info.model';
 
 @Component({
     selector: 'app-home',
@@ -9,22 +16,40 @@ import { Currency } from 'src/app/models/currency.model';
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+    settings$ = this._store.pipe(select(_selectSettings));
+    currencies$ = this._store.pipe(select(_selectCurrencies));
     currencyList: Currency[];
+    currentSettings: Settings;
+
+    settingsChangedSub: Subscription;
 
     constructor(
-        private _cryptoApiService: CryptocurrenciesApiService
+        private _store: Store<AppState>
     ) { }
 
     ngOnInit(): void {
+        this.subscribeToSettingsChanged();
+        this.triggerCurrenciesLoad();
     }
 
-    fetchCurrencyList(): void {
-        this._cryptoApiService.CryptocurrenciesList(10)
+    private subscribeToSettingsChanged() {
+        if (this.settingsChangedSub) {
+            this.settingsChangedSub.unsubscribe();
+        }
+        this.settingsChangedSub = this.settings$
             .pipe(
-                map((curList: Currency[]) => {
-                    this.currencyList = curList;
+                tap((updatedSettings: Settings) => {
+                    this.currentSettings = updatedSettings;
                 })
             )
             .subscribe();
+    }
+
+    triggerCurrenciesLoad() {
+        this._store.dispatch(GetCurrencies());
+    }
+
+    ngOnDestroy() {
+        this.settingsChangedSub.unsubscribe();
     }
 }

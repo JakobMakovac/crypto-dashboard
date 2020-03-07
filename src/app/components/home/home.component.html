@@ -1,5 +1,12 @@
-<p>home works!</p>
-<div (click)="fetchCurrencyList()" class="button">Fetch</div>
-<div *ngFor="let currency of currencyList">
-    {{ currency.name }}
+<p>Top 100 cryptocurrencies</p>
+<div class="list-container">
+    <div *ngFor="let currency of (currencies$ | async)" 
+        class="currency-row">
+        <div>{{currency.cmc_rank}}</div>
+        <div>{{currency.symbol}}</div>
+        <!--
+        <div>{{getQuote(currency).price | number:'1.2-2'}}</div>
+        <div>{{getQuote(currency).percent_change_24h | number:'1.2-2'}}</div>
+        -->
+    </div>
 </div>

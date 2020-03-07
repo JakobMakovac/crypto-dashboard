@@ -1,11 +1,14 @@
 import { SettingsState, initialSettingsState } from './settings.state';
+import { initialCurrenciesState, CurrenciesState } from './currencies.state';
 
 export interface AppState {
-    settings: SettingsState
+    settings: SettingsState,
+    currencies: CurrenciesState
 }
 
 export const initialAppState: AppState = {
-    settings: initialSettingsState
+    settings: initialSettingsState,
+    currencies: initialCurrenciesState
 }
 
 export function getInitialState(): AppState {

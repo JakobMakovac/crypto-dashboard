@@ -11,6 +11,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { SettingsEffects } from './store/effects/settings.effects';
 import { CryptocurrenciesApiService } from './services/cryptocurrencies-api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CurrenciesEffects } from './store/effects/currencies.effects';
+import { CurrenciesService } from './services/currencies.service';
+import { CurrencyAdapter } from './models/currency.model';
+import { QuoteInfoAdapter } from './models/quote-info.model';
 
 @NgModule({
     declarations: [
@@ -23,10 +27,13 @@ import { HttpClientModule } from '@angular/common/http';
         AppRoutingModule,
         HttpClientModule,
         StoreModule.forRoot(appReducers),
-        EffectsModule.forRoot([SettingsEffects])
+        EffectsModule.forRoot([SettingsEffects, CurrenciesEffects])
     ],
     providers: [
-        CryptocurrenciesApiService
+        CryptocurrenciesApiService,
+        CurrenciesService,
+        CurrencyAdapter,
+        QuoteInfoAdapter
     ],
     bootstrap: [AppComponent]
 })
