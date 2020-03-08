@@ -1,12 +1,11 @@
 <p>Top 100 cryptocurrencies</p>
+<div (click)="triggerCurrenciesLoad()" class="refresh-button">Refresh</div>
 <div class="list-container">
     <div *ngFor="let currency of (currencies$ | async)" 
         class="currency-row">
         <div>{{currency.cmc_rank}}</div>
         <div>{{currency.symbol}}</div>
-        <!--
-        <div>{{getQuote(currency).price | number:'1.2-2'}}</div>
-        <div>{{getQuote(currency).percent_change_24h | number:'1.2-2'}}</div>
-        -->
+        <div>{{getQuote(currency).price | number:'1.2-2'}}{{currentSettings.currency}}</div>
+        <div>{{getQuote(currency).percent_change_24h | number:'1.2-2'}}%</div>
     </div>
 </div>

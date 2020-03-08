@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { ECurrenciesActions, GetCurrenciesSuccess } from '../actions/currencies.actions';
-import { switchMap, take } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { CurrenciesService } from 'src/app/services/currencies.service';
 import { Currency } from 'src/app/models/currency.model';
 import { of } from 'rxjs';
@@ -19,7 +19,6 @@ export class CurrenciesEffects {
         switchMap(() => this._currenciesService.getCurrenciesList()),
         switchMap((currencyList: Currency[]) =>{
             return of(GetCurrenciesSuccess({_currencies: currencyList}));
-        }),
-        take(1)
+        })
     );
 }

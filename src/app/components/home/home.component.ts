@@ -8,7 +8,6 @@ import { _selectSettings } from 'src/app/store/selectors/settings.selector';
 import { Subscription } from 'rxjs';
 import { _selectCurrencies } from 'src/app/store/selectors/currencies.selector';
 import { GetCurrencies } from 'src/app/store/actions/currencies.actions';
-import { QuoteInfo } from 'src/app/models/quote-info.model';
 
 @Component({
     selector: 'app-home',
@@ -29,7 +28,6 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         this.subscribeToSettingsChanged();
-        this.triggerCurrenciesLoad();
     }
 
     private subscribeToSettingsChanged() {
@@ -43,6 +41,10 @@ export class HomeComponent implements OnInit {
                 })
             )
             .subscribe();
+    }
+
+    getQuote(currency: Currency) {
+        return currency.quotes[this.currentSettings.id];
     }
 
     triggerCurrenciesLoad() {

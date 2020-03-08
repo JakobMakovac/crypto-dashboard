@@ -14,7 +14,7 @@ export class Currency {
     
     quotes: {
         [id: number]: QuoteInfo
-    };
+    } = {};
 
     constructor(
         id: number,
@@ -37,7 +37,7 @@ export class Currency {
     }
 
     addOrUpdateQuote(quote: QuoteInfo):void {
-        this.quotes[quote.parentCurrencyId] = quote[quote.parentCurrencyId];
+        this.quotes[quote.quoteId] = quote;
     }
 }
 

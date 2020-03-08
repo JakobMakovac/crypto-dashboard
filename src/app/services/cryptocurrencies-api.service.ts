@@ -76,7 +76,11 @@ export class CryptocurrenciesApiService {
         })
             .pipe(
                 map((response: HttpResponse<any>) => {
-                    return response.body;
+                    let body: QuoteInfo[];
+
+                    body = <QuoteInfo[]>response.body.data;
+
+                    return <HttpResponse<QuoteInfo[]>> response.clone({body: body});
                 })
             );
     }
@@ -86,9 +90,12 @@ export class CryptocurrenciesApiService {
         return this.QuotesLatestResponse(idsStrings, convertId.toString())
             .pipe(
                 map((response: HttpResponse<any>) => {
-                    return response.body.map((item) => {
-                        let parentId = parseInt(Object.keys(item)[0]);
-                        let newQuote = this._quoteInfoAdapter.adapt(item);
+                    let currencyIds = Object.keys(response.body);
+
+                    return currencyIds.map((item) => {
+                        let currency = response.body[item];
+                        let parentId = currency.id;
+                        let newQuote = this._quoteInfoAdapter.adapt(currency.quote[convertId.toString()]);
                         newQuote.setParent(parentId);
                         newQuote.setId(convertId);
                         return newQuote;
