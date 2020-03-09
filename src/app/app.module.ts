@@ -15,12 +15,14 @@ import { CurrenciesEffects } from './store/effects/currencies.effects';
 import { CurrenciesService } from './services/currencies.service';
 import { CurrencyAdapter } from './models/currency.model';
 import { QuoteInfoAdapter } from './models/quote-info.model';
+import { CurrencyComponent } from './components/currency/currency.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        SettingsComponent
+        SettingsComponent,
+        CurrencyComponent
     ],
     imports: [
         BrowserModule,

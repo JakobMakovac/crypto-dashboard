@@ -1,0 +1,9 @@
+<div class="details-container">
+    <div (click)="refreshCurrency()">Refresh</div>
+    <div>{{(currency$ | async)?.cmc_rank}}</div>
+    <div>{{(currency$ | async)?.name}}</div>
+    <div>{{(currency$ | async)?.symbol}}</div>
+    <div>{{(currency$ | async)?.total_supply}}</div>
+    <div>{{(currency$ | async)?.circulating_supply}}</div>
+    <div>{{(currency$ | async)?.quotes[1].price}}</div>
+</div>

@@ -36,8 +36,12 @@ export class Currency {
         this.max_supply = max_supply;
     }
 
-    addOrUpdateQuote(quote: QuoteInfo):void {
+    addOrUpdateQuote(quote: QuoteInfo): void {
         this.quotes[quote.quoteId] = quote;
+    }
+
+    addOrUpdateQuoteList(quotes: QuoteInfo[]): void {
+        quotes.forEach((q) => this.addOrUpdateQuote(q));
     }
 }
 

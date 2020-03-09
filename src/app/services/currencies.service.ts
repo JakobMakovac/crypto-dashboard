@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { CryptocurrenciesApiService } from './cryptocurrencies-api.service';
 import { Observable, from, of } from 'rxjs';
 import { Currency } from '../models/currency.model';
-import { flatMap } from 'rxjs/operators';
+import { flatMap, toArray, map } from 'rxjs/operators';
 import { QuoteInfo } from '../models/quote-info.model';
 import _ from 'lodash';
 
@@ -32,6 +32,19 @@ export class CurrenciesService {
 
     getQuoteForCurrency(currencyId: number[], convertId: number): Observable<QuoteInfo[]> {
         return this._cryptocurrenciesApiService.QuotesLatest(currencyId, convertId);
+    }
+
+    refreshQuotesForCurrency(currencyId: number): Observable<QuoteInfo[]> {
+        return from([1, 2781, 2787, 2790])
+            .pipe(
+                flatMap((_convertId: number) => {
+                    return this.getQuoteForCurrency([currencyId], _convertId);
+                }),
+                flatMap((quote: QuoteInfo[]) => {
+                    return quote;
+                }),
+                toArray()
+            );
     }
 
     private mapQuotesToCurrencies(currencyList: Currency[], quotes: QuoteInfo[]): Observable<Currency[]> {

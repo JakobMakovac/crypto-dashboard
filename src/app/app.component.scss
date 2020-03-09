@@ -18,9 +18,21 @@
         font-size: 20px;
         font-family: sans-serif;
     }
+    .current-settings {
+        margin: auto 8px;
+    }
     .settings {
         width: fit-content;
         margin: auto 8px;
         font-size: 16px;
+    }
+}
+.content {
+    display: flex;
+    .sidebar {
+        width: 50%;
+    }
+    .right {
+        width: auto;
     }
 }

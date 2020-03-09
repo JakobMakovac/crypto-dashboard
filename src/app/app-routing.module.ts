@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { CurrencyComponent } from './components/currency/currency.component';
 
 const routes: Routes = [
     {
@@ -11,11 +12,27 @@ const routes: Routes = [
     },
     {
         path: 'home',
-        component: HomeComponent
+        children: [
+            {
+                path: '',
+                outlet: 'sidebar',
+                component: HomeComponent
+            },
+            {
+                path: ':currencyId',
+                component: CurrencyComponent
+            }
+        ]
     },
     {
         path: 'settings',
-        component: SettingsComponent
+        children: [
+            {
+                path: '',
+                outlet: 'sidebar',
+                component: SettingsComponent   
+            }
+        ]
     }
 ];
 

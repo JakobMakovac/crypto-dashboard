@@ -1,5 +1,8 @@
-.currency-row {
-    display: flex;
-    justify-content: space-between;
-    margin-right: 200px;
+.list-container {
+    height: 90vh;
+    overflow: scroll;
+    .currency-row {
+        display: flex;
+        justify-content: space-between;
+    }
 }

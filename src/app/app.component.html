@@ -2,12 +2,15 @@
 <div class="toolbar" role="banner">
   <a routerLink="/" class="home">Home</a>
   <div class="logo">Crypto Dashboard</div>
-  <div>Curent settings: {{(settings$ | async)?.currency}}</div>
+  <div class="current-settings">Selected currency: {{(settings$ | async)?.currency}}</div>
   <a routerLink="/settings" class="settings">Settings</a>
 </div>
 
 <div class="content" role="main">
-
-<router-outlet></router-outlet>
-
+  <div class="sidebar">
+    <router-outlet name="sidebar"></router-outlet>
+  </div>
+  <div class="right">
+    <router-outlet></router-outlet>
+  </div>
 </div>
