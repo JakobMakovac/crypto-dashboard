@@ -1,0 +1,101 @@
+.container {
+    margin: 180px auto auto auto;
+    width: 48vw;
+    font-family: sans-serif;
+    .details-container {
+        display: flex;
+        flex-direction: column;
+        .currency-info {
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+            margin: auto;
+            font-size: 20px;
+            .rank {
+                margin-right: 16px;
+            }
+        }
+        .fiat-info {
+            width: calc(80% - 10px);
+            margin: 12px auto;
+            border: 1px solid lightgrey;
+            padding: 5px;
+            border-radius: 5px;
+            .fiat-name {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+            .price, .volume, .market-cap {
+                flex-direction: row;
+                display: flex;
+                justify-content: flex-start;
+                .property-name {
+                    display: block;
+                    width: 170px;
+                }
+            }
+        }
+        .total-supply, .available-supply {
+            width: 80%;
+            margin: auto;
+            flex-direction: row;
+            display: flex;
+            justify-content: flex-start;
+            .property-name {
+                display: block;
+                width: 170px;
+            }
+        }
+        .changes {
+            width: 80%;
+            margin: 24px auto 12px;
+            .changes-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .change {
+                    color: red;
+                    &.green {
+                        color: seagreen;
+                    }
+                }
+            }
+        }
+        .btc-price {
+            width: 80%;
+            margin: 0px auto 24px;
+        }
+        .buttons {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            .button {
+                margin: auto;
+                width: 130px;
+                height: 32px;
+                color: #fff;
+                font-family: sans-serif;
+                text-align: center;
+                font-size: 14px;
+                letter-spacing: 0.7px;
+                line-height: 32px;
+                border-radius: 13px;
+                cursor: pointer;
+                &.close {
+                    background-color: firebrick;
+                    &:hover {
+                        background-color: #861d1d;
+                    }
+                }
+                &.refresh {
+                    background-color: #2196f3;
+                    &:hover {
+                        background-color: #0069c0;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { CryptocurrenciesApiService } from './cryptocurrencies-api.service';
 import { Observable, from, of } from 'rxjs';
 import { Currency } from '../models/currency.model';
-import { flatMap, toArray, map } from 'rxjs/operators';
+import { flatMap, toArray, map, tap } from 'rxjs/operators';
 import { QuoteInfo } from '../models/quote-info.model';
 import _ from 'lodash';
 
@@ -25,7 +25,12 @@ export class CurrenciesService {
                     return this.getQuoteForCurrency(ids, convertId);
                 }),
                 flatMap((quotes: QuoteInfo[]) => {
-                    return this.mapQuotesToCurrencies(currencyList, quotes);
+                    currencyList = this.mapQuotesToCurrencies(currencyList, quotes);
+                    return of(true);
+                }),
+                toArray(),
+                flatMap((x) => {
+                    return of(currencyList);
                 })
             );
     }
@@ -47,7 +52,7 @@ export class CurrenciesService {
             );
     }
 
-    private mapQuotesToCurrencies(currencyList: Currency[], quotes: QuoteInfo[]): Observable<Currency[]> {
+    private mapQuotesToCurrencies(currencyList: Currency[], quotes: QuoteInfo[]): Currency[] {
         let cursByParentId = _.groupBy(quotes, 'parentCurrencyId');
         currencyList.map((currency: Currency) => {
             let q = cursByParentId[currency.id][0];
@@ -55,6 +60,6 @@ export class CurrenciesService {
                 currency.addOrUpdateQuote(q);
             }
         });
-        return of(currencyList);
+        return currencyList;
     }
 }

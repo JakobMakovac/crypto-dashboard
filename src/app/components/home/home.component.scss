@@ -3,6 +3,58 @@
     overflow: scroll;
     .currency-row {
         display: flex;
+        height: 40px;
         justify-content: space-between;
+        cursor: pointer;
+        &:hover {
+            background-color: #dddddd;
+        }
+        .rank {
+            font-size: 18px;
+            font-weight: 600;
+            margin: auto 4px;
+        }
+        .symbol {
+            font-size: 18px;
+            margin: auto auto auto 9px;
+        }
+        .price {
+            font-size: 18px;
+            margin: auto 22px;
+        }
+        .percent-change {
+            font-size: 18px;
+            font-weight: 600;
+            margin: auto 6px;
+            color: red;
+            &.green {
+                color: seagreen;
+            }
+        }   
     }
+}
+.list-container::-webkit-scrollbar {
+    display: none;
+}
+.refresh-button {
+    width: 90px;
+    margin-left: 16px;
+    height: 32px;
+    background-color: #2196f3;
+    color: #fff;
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 0.7px;
+    line-height: 32px;
+    border-radius: 13px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    &:hover {
+        background-color: #0069c0;
+    }
+}
+p {
+    font-size: 20px;
+    font-family: sans-serif;
 }

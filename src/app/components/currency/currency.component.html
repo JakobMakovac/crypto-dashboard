@@ -1,9 +1,68 @@
-<div class="details-container">
-    <div (click)="refreshCurrency()">Refresh</div>
-    <div>{{(currency$ | async)?.cmc_rank}}</div>
-    <div>{{(currency$ | async)?.name}}</div>
-    <div>{{(currency$ | async)?.symbol}}</div>
-    <div>{{(currency$ | async)?.total_supply}}</div>
-    <div>{{(currency$ | async)?.circulating_supply}}</div>
-    <div>{{(currency$ | async)?.quotes[1].price}}</div>
+<div class="container">
+    <div class="details-container">
+        <div class="currency-info">
+            <div class="rank">{{(currency$ | async)?.cmc_rank}}</div>
+            <div class="name">{{(currency$ | async)?.name}}&nbsp;({{(currency$ | async)?.symbol}})</div>
+        </div>
+        <div class="fiat-info">
+            <div class="fiat-name">{{currentSettings.currency}}</div>
+            <div class="price">
+                <span class="property-name">Price</span>
+                <span class="property">
+                    {{(currency$ | async)?.quotes[currentSettings.id].price | number:'1.2-2'}}&nbsp;{{currentSettings.currency}}
+                </span>
+            </div>
+            <div class="volume">
+                <span class="property-name">24h volume</span>
+                <span class="property">
+                    {{(currency$ | async)?.quotes[currentSettings.id].volume_24h | number:'1.2-2'}}&nbsp;{{currentSettings.currency}}
+                </span>
+            </div>
+            <div class="market-cap">
+                <span class="property-name">Market cap</span>
+                <span class="property">
+                    {{(currency$ | async)?.quotes[currentSettings.id].market_cap | number:'1.2-2'}}&nbsp;{{currentSettings.currency}}
+                </span>
+            </div>
+        </div>
+
+        <div class="total-supply">
+            <span class="property-name">Total supply</span>
+            <span class="property">{{(currency$ | async)?.total_supply | number:'1.2-2'}}&nbsp;{{currentSettings.currency}}</span>
+        </div>
+        <div class="available-supply">
+            <span class="property-name">Available supply</span>
+            <span class="property">{{(currency$ | async)?.circulating_supply | number:'1.2-2'}}&nbsp;{{currentSettings.currency}}</span>
+        </div>
+
+        <div class="changes">
+            <div>Changes</div>
+            <div class="changes-container">
+                <div class="1h">
+                    <div>1h</div>
+                    <div class="change" [class.green]="(currency$ | async)?.quotes[currentSettings.id].percent_change_1h > 0">
+                        {{(currency$ | async)?.quotes[currentSettings.id].percent_change_1h | number:'1.2-2'}}%
+                    </div>
+                </div>
+                <div class="24h">
+                    <div>24h</div>
+                    <div class="change" [class.green]="(currency$ | async)?.quotes[currentSettings.id].percent_change_24h > 0">
+                        {{(currency$ | async)?.quotes[currentSettings.id].percent_change_24h | number:'1.2-2'}}%
+                    </div>
+                </div>
+                <div class="7d">
+                    <div>7d</div>
+                    <div class="change" [class.green]="(currency$ | async)?.quotes[currentSettings.id].percent_change_7d > 0">
+                        {{(currency$ | async)?.quotes[currentSettings.id].percent_change_7d | number:'1.2-2'}}%
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="btc-price">Price in BTC:&nbsp;{{(currency$ | async)?.quotes[1].price| number:'1.2-7'}}&nbsp;BTC</div>
+        <div class="buttons">
+            <div (click)="refreshCurrency()" class="button refresh">Refresh</div>
+            <div (click)="close()" class="button close">Close</div>
+        </div>
+    </div>
 </div>
