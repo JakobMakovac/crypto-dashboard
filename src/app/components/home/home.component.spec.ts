@@ -5,6 +5,7 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { AppState, initialAppState } from 'src/app/store/state/app.state';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -18,6 +19,9 @@ describe('HomeComponent', () => {
       declarations: [ HomeComponent ],
       providers: [
         provideMockStore({initialState})
+      ],
+      imports:[
+        RouterTestingModule.withRoutes([])
       ]
     })
     .compileComponents();
