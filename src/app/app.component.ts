@@ -20,6 +20,6 @@ export class AppComponent {
 
     ngOnInit() {
         this._store.dispatch(GetSettings());
-        // this._store.dispatch(GetCurrencies());
+        this._store.dispatch(GetCurrencies());
     }
 }
